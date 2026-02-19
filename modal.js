@@ -69,7 +69,7 @@ function contactarCorreo(event) {
     const mensaje = inputMensaje.value;
 
     // 4. Configurar el correo
-    const emailDestino = "demovecsa@gmail.com";
+    const emailDestino = "example@gmail.com";
     const subject = encodeURIComponent(`Nuevo contacto web de: ${nombre}`);
     const bodyTexto = `Nombre: ${nombre}\nCorreo del cliente: ${emailCliente}\n\nProyecto/Mensaje:\n${mensaje}`;
     const body = encodeURIComponent(bodyTexto);

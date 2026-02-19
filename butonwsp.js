@@ -12,7 +12,7 @@
         
         // 4. Número Local (7 dígitos restantes)
         // CÁMBIALO AQUÍ POR EL REAL:
-        const number = "3410584"; 
+        const number = "23434545"; 
         
         // 5. Mensaje predefinido (Codificado para URL)
         const message = encodeURIComponent("Hola, vi su sitio web y me interesa una cotización.");
