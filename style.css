@@ -1512,6 +1512,161 @@ html, body {
     }
 }
 
+/* --- IOT DEEP DIVE SECTION --- */
+.iot-section {
+    padding: 120px 0;
+    /* Fondo oscuro pero un poco más claro que el negro total para contraste */
+    background: linear-gradient(to right, #0f172a, #1e293b); 
+    color: white;
+    overflow: hidden;
+}
+
+.iot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.iot-content h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.iot-content p {
+    font-size: 1.1rem;
+    color: #94a3b8; /* Gris azulado claro */
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+/* Lista de características con iconos */
+.iot-list {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.iot-list li {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.icon-box {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-box i {
+    font-size: 1.5rem;
+    color: var(--bio-cyan);
+}
+
+.iot-list h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.iot-list p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* --- VENTANA DE NAVEGADOR (BROWSER MOCKUP) --- */
+.browser-window {
+    background: #0B1120;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transform: perspective(1000px) rotateY(-5deg); /* Ligera inclinación 3D */
+    transition: transform 0.5s ease;
+}
+
+.browser-window:hover {
+    transform: perspective(1000px) rotateY(0deg); /* Se endereza al pasar el mouse */
+}
+
+.browser-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ef4444; }
+.dot.yellow { background: #eab308; }
+.dot.green { background: #22c55e; }
+
+.browser-address {
+    margin-left: 15px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.browser-body {
+    position: relative;
+    line-height: 0; /* Elimina espacio extra debajo de la imagen */
+}
+
+.dashboard-img {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+.screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradiente azulado para integrar la foto con tu marca */
+    background: linear-gradient(to bottom, rgba(6, 182, 212, 0.1), rgba(11, 17, 32, 0.4));
+    pointer-events: none;
+}
+
+/* RESPONSIVO */
+@media (max-width: 960px) {
+    .iot-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .browser-window {
+        transform: none; /* Quitamos el 3D en tablets/móviles */
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .iot-content h2 { font-size: 3.5rem; }
+}
+
 /**AJUSTES PARA PANTALLAS MUY GRANDES (4K) - OPTIMIZACIÓN DE ESPACIOS Y TIPOGRAFÍA
 
 
