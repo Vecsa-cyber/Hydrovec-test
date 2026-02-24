@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECSA WATER | Ingeniería en Tratamiento de Agua Industrial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        industrial: { 900: '#0F172A', 800: '#1E293B', 700: '#334155', 600: '#475569' },
+                        water: { 600: '#0284C7', 500: '#0EA5E9', 400: '#38BDF8', 50: '#F0F9FF' },
+                        accent: { 500: '#059669', 400: '#10B981', 100: '#D1FAE5' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Backgrounds con overlay oscuro para legibilidad */
+        .hero-pattern {
+            background-color: #0F172A;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        .iot-pattern {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+        }
+        
+        .logo-grayscale { filter: grayscale(100%) opacity(60%); transition: all 0.3s ease; }
+        .logo-grayscale:hover { filter: grayscale(0%) opacity(100%); }
+        
+        /* Carrusel de Tecnologías */
+        .tech-scroll {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+        }
+        .tech-scroll::-webkit-scrollbar { display: none; }
+        .tech-card { scroll-snap-align: start; flex: 0 0 85%; }
+        @media (min-width: 768px) {
+            .tech-scroll { display: grid; grid-template-columns: repeat(4, 1fr); overflow-x: visible; }
+            .tech-card { flex: auto; }
+        }
+
+        /* Acordeón FAQ */
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
+        @keyframes sweep { 0% {opacity: 0; margin-top: -10px} 100% {opacity: 1; margin-top: 0px} }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- NAVEGACIÓN -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <span class="text-2xl font-extrabold text-industrial-900 tracking-tight">VECSA<span class="text-water-600">WATER</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#soluciones" class="text-sm font-semibold text-gray-600 hover:text-water-600 transition">Servicios</a>
+                    <a href="#iot" class="text-sm font-semibold text-gray-600 hover:text-water-600 transition">Plataforma IoT</a>
+                    <a href="#metodologia" class="text-sm font-semibold text-gray-600 hover:text-water-600 transition">Ingeniería</a>
+                    <a href="#tecnologias" class="text-sm font-semibold text-gray-600 hover:text-water-600 transition">Tecnologías</a>
+                    <a href="#contacto" class="bg-water-600 hover:bg-water-500 text-white px-5 py-2.5 rounded-md text-sm font-bold shadow-md transition transform hover:-translate-y-0.5">Agendar Diagnóstico</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero-pattern py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center">
+            <div class="md:w-2/3 pr-0 md:pr-12">
+                <span class="text-water-400 font-bold tracking-wider text-sm uppercase mb-4 block flex items-center justify-center md:justify-start">
+                    <span class="w-2 h-2 bg-accent-500 rounded-full animate-pulse mr-2"></span> Ingeniería B2B en Tratamiento de Agua
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Continuidad Operativa mediante el Control Total del Agua
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl">
+                    Implementamos proyectos llave en mano, renta de equipos y pólizas de mantenimiento predictivo (IoT) para la industria. Protegemos sus procesos, optimizamos el OPEX y aseguramos el cumplimiento normativo.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+                    <a href="#contacto" class="bg-water-600 hover:bg-water-500 text-white px-8 py-3.5 rounded-md text-base font-bold shadow-lg transition text-center">Solicitar Auditoría de Sistema</a>
+                    <a href="#soluciones" class="bg-transparent border border-gray-400 text-white hover:bg-white hover:text-industrial-900 px-8 py-3.5 rounded-md text-base font-bold transition text-center">Ver Soluciones OPEX</a>
+                </div>
+            </div>
+            <div class="hidden md:block md:w-1/3 mt-10 md:mt-0">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ingeniero operando planta" class="rounded-lg shadow-2xl border border-gray-700 opacity-90">
+            </div>
+        </div>
+    </header>
+
+    <!-- MÉTRICAS DE IMPACTO (Dinámicas y 3 Columnas) -->
+    <div class="bg-water-600 py-10 shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-water-500">
+                <div class="py-4 md:py-0">
+                    <!-- Atributos data-* para controlar la animación en JS -->
+                    <p class="text-4xl md:text-5xl font-extrabold text-white mb-2 counter" data-target="100" data-prefix="+" data-suffix="">0</p>
+                    <p class="text-water-100 text-sm font-semibold uppercase tracking-wide">Proyectos Realizados</p>
+                </div>
+                <div class="py-4 md:py-0">
+                    <p class="text-4xl md:text-5xl font-extrabold text-white mb-2 counter" data-target="55" data-prefix="" data-suffix="">0</p>
+                    <p class="text-water-100 text-sm font-semibold uppercase tracking-wide">Pólizas Activas</p>
+                </div>
+                <div class="py-4 md:py-0">
+                    <p class="text-4xl md:text-5xl font-extrabold text-white mb-2 counter" data-target="1.6" data-prefix="" data-suffix="M" data-float="true">0.0</p>
+                    <p class="text-water-100 text-sm font-semibold uppercase tracking-wide">Litros Tratados al Día</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE CLIENTES -->
+    <section class="py-10 bg-white border-b border-gray-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-8">Plantas industriales que confían en nosotros</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition duration-500">
+                <span class="text-2xl md:text-3xl font-black font-sans tracking-tighter text-red-700">SIGMA</span>
+                <span class="text-2xl md:text-3xl font-bold font-serif italic text-blue-800">Linde</span>
+                <span class="text-xl md:text-2xl font-black tracking-widest text-yellow-500">CATERPILLAR</span>
+                <span class="text-2xl md:text-3xl font-bold tracking-widest text-gray-800">PEÑOLES</span>
+                <span class="text-2xl md:text-3xl font-bold text-blue-900">LEAR CORP</span>
+                <span class="text-2xl md:text-3xl font-black text-red-600 tracking-tighter">BorgWarner</span>
+                <span class="text-2xl md:text-3xl font-bold text-gray-800">MARTINREA</span>
+                <span class="text-2xl md:text-3xl font-black text-blue-900 tracking-tighter">CEMEX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE SERVICES -->
+    <section id="soluciones" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-industrial-900 mb-4">Ingeniería Financiera y Operativa del Agua</h2>
+                <p class="text-gray-600 text-lg">Su planta tiene necesidades específicas. Hemos estructurado nuestras soluciones para adaptarse a sus requerimientos de flujo de caja y mitigación de riesgos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1: Pólizas -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-xl transition duration-300 group overflow-hidden flex flex-col">
+                    <div class="h-48 w-full overflow-hidden relative">
+                        <div class="absolute inset-0 bg-industrial-900 opacity-20 group-hover:opacity-0 transition duration-300 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ingeniero con tablet monitoreando" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <h3 class="text-2xl font-bold text-industrial-900 mb-3">Pólizas de Mantenimiento</h3>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Prevención de paros de planta a través de monitoreo remoto 24/7 y visitas programadas. La certeza de que sus equipos operan en parámetros de diseño.</p>
+                        <ul class="text-sm text-gray-600 space-y-3 mb-8">
+                            <li class="flex items-start"><span class="text-accent-500 mr-2 font-bold">✓</span> Extensión de vida útil de membranas</li>
+                            <li class="flex items-start"><span class="text-accent-500 mr-2 font-bold">✓</span> Visibilidad en tiempo real (Cloud IoT)</li>
+                            <li class="flex items-start"><span class="text-accent-500 mr-2 font-bold">✓</span> Trazabilidad para auditorías (CONAGUA)</li>
+                        </ul>
+                    </div>
+                    <div class="px-8 pb-8 mt-auto">
+                        <a href="#contacto" class="text-water-600 font-bold text-sm hover:text-water-800 flex items-center">Cotizar póliza <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service 2: Renta -->
+                <div class="bg-white rounded-xl shadow-md border-2 border-water-600 hover:shadow-xl transition duration-300 relative transform md:-translate-y-4 overflow-hidden flex flex-col">
+                    <div class="absolute top-0 right-0 bg-water-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg z-20 uppercase tracking-wide">OPEX / Cero Inversión</div>
+                    <div class="h-48 w-full overflow-hidden relative">
+                        <div class="absolute inset-0 bg-water-900 opacity-20 group-hover:opacity-0 transition duration-300 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Planta de tratamiento en contenedor" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <h3 class="text-2xl font-bold text-industrial-900 mb-3">Renta de Equipos</h3>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Disponibilidad inmediata de plantas de tratamiento y sistemas de reuso bajo un modelo 100% deducible. Solucione emergencias sin autorizaciones de CAPEX.</p>
+                        <ul class="text-sm text-gray-600 space-y-3 mb-8">
+                            <li class="flex items-start"><span class="text-water-600 mr-2 font-bold">✓</span> Implementación rápida (Plug & Play)</li>
+                            <li class="flex items-start"><span class="text-water-600 mr-2 font-bold">✓</span> Mantenimiento y refacciones incluidas</li>
+                            <li class="flex items-start"><span class="text-water-600 mr-2 font-bold">✓</span> Ventajas fiscales inmediatas</li>
+                        </ul>
+                    </div>
+                    <div class="px-8 pb-8 mt-auto">
+                        <a href="#contacto" class="text-water-600 font-bold text-sm hover:text-water-800 flex items-center">Evaluar viabilidad <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service 3: Proyectos -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-xl transition duration-300 group overflow-hidden flex flex-col">
+                    <div class="h-48 w-full overflow-hidden relative">
+                        <div class="absolute inset-0 bg-industrial-900 opacity-20 group-hover:opacity-0 transition duration-300 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1584907600887-9732fd385fd0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Instalación de planta de tratamiento" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <h3 class="text-2xl font-bold text-industrial-900 mb-3">Proyectos Llave en Mano</h3>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Ingeniería, suministro, instalación y puesta en marcha de plantas tratadoras. Diseños a la medida para cumplir estrictamente con normativas ambientales.</p>
+                        <ul class="text-sm text-gray-600 space-y-3 mb-8">
+                            <li class="flex items-start"><span class="text-accent-500 mr-2 font-bold">✓</span> Ingeniería de detalle y simulación</li>
+                            <li class="flex items-start"><span class="text-accent-500 mr-2 font-bold">✓</span> Integración de tableros y automatización</li>
+                            <li class="flex items-start"><span class="text-accent-500 mr-2 font-bold">✓</span> Capacitación de operadores en sitio</li>
+                        </ul>
+                    </div>
+                    <div class="px-8 pb-8 mt-auto">
+                        <a href="#contacto" class="text-water-600 font-bold text-sm hover:text-water-800 flex items-center">Solicitar propuesta <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEP DIVE IOT -->
+    <section id="iot" class="iot-pattern py-24 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <span class="text-accent-400 font-bold tracking-wider text-sm uppercase mb-4 block">Mantenimiento Predictivo 4.0</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">VECSA Cloud: El cuarto de control en su bolsillo</h2>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                        No espere a que la bomba falle o la membrana se incruste. Nuestras pólizas incluyen la instalación de pasarelas IoT en sus tableros existentes para extraer telemetría en tiempo real.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500/20 flex items-center justify-center border border-accent-500 mt-1">
+                                <svg class="w-4 h-4 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-white font-bold">Alertas Tempranas (SMS/Email)</h4>
+                                <p class="text-sm text-gray-400">Notificaciones automáticas si la presión diferencial o la conductividad salen de los parámetros de diseño.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500/20 flex items-center justify-center border border-accent-500 mt-1">
+                                <svg class="w-4 h-4 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-white font-bold">Reportes Gerenciales Automatizados</h4>
+                                <p class="text-sm text-gray-400">Gráficos históricos de consumo de agua y químicos, listos para presentar a la Dirección General.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="inline-block bg-white text-industrial-900 font-bold px-6 py-3 rounded-md hover:bg-gray-100 transition">Solicitar Demo del Dashboard</a>
+                </div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-industrial-800 rounded-xl border border-gray-600 shadow-2xl overflow-hidden">
+                        <div class="bg-industrial-900 px-4 py-3 border-b border-gray-700 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-4 text-xs text-gray-400 font-mono">vecsa-cloud.app / Planta_Bajio_01</span>
+                        </div>
+                        <div class="p-6">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dashboard IoT" class="w-full rounded border border-gray-700 opacity-80 hover:opacity-100 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METODOLOGÍA DE EJECUCIÓN -->
+    <section id="metodologia" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-water-600 font-bold tracking-wider text-sm uppercase mb-2 block">Cero Improvisación</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-industrial-900 mb-4">Metodología de Ejecución de Proyectos</h2>
+                <p class="text-gray-600 text-lg">Del diagrama P&ID a la puesta en marcha. Ejecutamos bajo estrictos estándares de ingeniería para garantizar que la planta cumpla con el caudal y la calidad prometida.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+                
+                <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm relative text-center">
+                    <div class="w-12 h-12 bg-water-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-lg ring-4 ring-white">1</div>
+                    <h4 class="font-bold text-industrial-900 mb-2">Levantamiento y Caracterización</h4>
+                    <p class="text-sm text-gray-600">Análisis físico-químico del afluente, revisión de espacio físico y definición de requerimientos (NOM).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm relative text-center">
+                    <div class="w-12 h-12 bg-water-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-lg ring-4 ring-white">2</div>
+                    <h4 class="font-bold text-industrial-900 mb-2">Ingeniería de Detalle</h4>
+                    <p class="text-sm text-gray-600">Desarrollo de diagramas de flujo, P&ID, selección de bombas, membranas y diseño de tableros de control.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm relative text-center">
+                    <div class="w-12 h-12 bg-water-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-lg ring-4 ring-white">3</div>
+                    <h4 class="font-bold text-industrial-900 mb-2">Fabricación y Ensamble (Skid)</h4>
+                    <p class="text-sm text-gray-600">Integración electromecánica en taller para minimizar el tiempo de intervención y soldadura en su planta.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm relative text-center">
+                    <div class="w-12 h-12 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-lg ring-4 ring-white">4</div>
+                    <h4 class="font-bold text-industrial-900 mb-2">Commissioning y Capacitación</h4>
+                    <p class="text-sm text-gray-600">Arranque en sitio, estabilización biológica/química, pruebas SAT y entrega de manuales operativos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECNOLOGÍAS (CARRUSEL/GRID) -->
+    <section id="tecnologias" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div class="max-w-2xl">
+                    <span class="text-water-600 font-bold tracking-wider text-sm uppercase mb-2 block">Arsenal Tecnológico</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-industrial-900">Tecnologías de Separación y Tratamiento</h2>
+                </div>
+                <p class="text-gray-500 text-sm mt-4 md:mt-0 hidden md:block">Deslice para ver más →</p>
+            </div>
+
+            <div class="tech-scroll gap-6 pb-8">
+                <!-- Tech 1 -->
+                <div class="tech-card bg-white rounded-xl p-6 border border-gray-200 hover:border-water-400 transition shadow-sm group">
+                    <div class="h-48 bg-gray-200 rounded-lg mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-industrial-900 opacity-10 group-hover:opacity-0 transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1584907600887-9732fd385fd0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ósmosis Inversa" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    </div>
+                    <h4 class="text-xl font-bold text-industrial-900 mb-2">Ósmosis Inversa (RO)</h4>
+                    <p class="text-sm text-gray-600 mb-4">Eliminación de sólidos disueltos (TDS) para generar agua de calidad ultra pura. Ideal para calderas y procesos críticos.</p>
+                    <span class="inline-block bg-water-50 text-water-600 text-xs px-2 py-1 rounded font-semibold">Agua Ultrapura</span>
+                </div>
+
+                <!-- Tech 2 -->
+                <div class="tech-card bg-white rounded-xl p-6 border border-gray-200 hover:border-water-400 transition shadow-sm group">
+                    <div class="h-48 bg-gray-200 rounded-lg mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-industrial-900 opacity-10 group-hover:opacity-0 transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1615572359976-1322884f299f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ultrafiltración" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    </div>
+                    <h4 class="text-xl font-bold text-industrial-900 mb-2">Ultrafiltración (UF)</h4>
+                    <p class="text-sm text-gray-600 mb-4">Barrera física absoluta contra sólidos suspendidos, bacterias y virus. El pre-tratamiento perfecto para proteger sistemas RO.</p>
+                    <span class="inline-block bg-water-50 text-water-600 text-xs px-2 py-1 rounded font-semibold">Pre-tratamiento</span>
+                </div>
+
+                <!-- Tech 3 -->
+                <div class="tech-card bg-white rounded-xl p-6 border border-gray-200 hover:border-water-400 transition shadow-sm group">
+                    <div class="h-48 bg-gray-200 rounded-lg mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-industrial-900 opacity-10 group-hover:opacity-0 transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1574689049597-7e6f4bc2a5ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="MBR" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    </div>
+                    <h4 class="text-xl font-bold text-industrial-900 mb-2">Biorreactores (MBR)</h4>
+                    <p class="text-sm text-gray-600 mb-4">Combinación de degradación biológica con filtración por membranas. Huella compacta y efluente para reuso directo.</p>
+                    <span class="inline-block bg-water-50 text-water-600 text-xs px-2 py-1 rounded font-semibold">Reuso Industrial</span>
+                </div>
+
+                <!-- Tech 4 -->
+                <div class="tech-card bg-white rounded-xl p-6 border border-gray-200 hover:border-water-400 transition shadow-sm group">
+                    <div class="h-48 bg-gray-200 rounded-lg mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-industrial-900 opacity-10 group-hover:opacity-0 transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fisicoquímico" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    </div>
+                    <h4 class="text-xl font-bold text-industrial-900 mb-2">Fisicoquímicos</h4>
+                    <p class="text-sm text-gray-600 mb-4">Tratamiento especializado para aguas complejas. Remoción de metales pesados, grasas y aceites mediante coagulación.</p>
+                    <span class="inline-block bg-water-50 text-water-600 text-xs px-2 py-1 rounded font-semibold">Aguas Complejas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALIANZAS TECNOLÓGICAS -->
+    <div class="bg-white border-b border-t border-gray-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-semibold text-gray-500 mb-6 uppercase tracking-wider">Alianzas Tecnológicas y Componentes</p>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center text-center font-bold text-gray-400 text-xl">
+                <div class="logo-grayscale hover:text-industrial-900">MANN+HUMMEL</div>
+                <div class="logo-grayscale hover:text-industrial-900">HYDRANAUTICS</div>
+                <div class="logo-grayscale hover:text-industrial-900">LG CHEM</div>
+                <div class="logo-grayscale hover:text-industrial-900">PENTAIR</div>
+                <div class="logo-grayscale hover:text-industrial-900">BARNES</div>
+                <div class="logo-grayscale hover:text-industrial-900">AQUATROL</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUMPLIMIENTO NORMATIVO -->
+    <section class="py-12 bg-industrial-900 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-6 md:mb-0">
+                <h3 class="text-2xl font-bold text-white mb-2">Cumplimiento Normativo y Seguridad</h3>
+                <p class="text-gray-400 text-sm">Nuestros diseños y personal cumplen con las exigencias de las auditorías más estrictas de México.</p>
+            </div>
+            <div class="md:w-1/2 flex flex-wrap gap-4 justify-start md:justify-end">
+                <span class="px-4 py-2 bg-industrial-800 border border-gray-600 rounded text-gray-300 font-bold text-sm">NOM-001-SEMARNAT</span>
+                <span class="px-4 py-2 bg-industrial-800 border border-gray-600 rounded text-gray-300 font-bold text-sm">NOM-002-SEMARNAT</span>
+                <span class="px-4 py-2 bg-industrial-800 border border-gray-600 rounded text-gray-300 font-bold text-sm flex items-center"><svg class="w-4 h-4 text-accent-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> STPS (DC-3)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (Acordeón) -->
+    <section class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-industrial-900 mb-4">Preguntas Frecuentes</h2>
+                <p class="text-gray-600">Resolvemos las dudas técnicas y operativas más comunes de nuestros clientes industriales.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="bg-white rounded-lg border border-gray-200 shadow-sm group" open>
+                    <summary class="flex justify-between items-center font-bold text-industrial-900 p-6 cursor-pointer">
+                        ¿Qué incluye exactamente el modelo de Renta (OPEX)?
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-gray-600 px-6 pb-6 text-sm leading-relaxed">
+                        Nuestro modelo de renta incluye el equipo de tratamiento (montado en skid o contenedor), la instalación inicial, el mantenimiento preventivo mensual, refacciones críticas y el monitoreo remoto. Usted solo provee el espacio, la alimentación eléctrica y el agua cruda. Es un gasto 100% deducible.
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg border border-gray-200 shadow-sm group">
+                    <summary class="flex justify-between items-center font-bold text-industrial-900 p-6 cursor-pointer">
+                        ¿Cómo funciona el monitoreo IoT en las pólizas de mantenimiento?
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-gray-600 px-6 pb-6 text-sm leading-relaxed">
+                        Instalamos una pasarela de comunicación (Gateway) en su tablero de control existente. Esto nos permite extraer datos de sus sensores (presión, conductividad, flujo) y enviarlos a nuestra nube segura. Si un parámetro sale de la norma, nuestros ingenieros reciben una alerta antes de que el equipo falle.
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg border border-gray-200 shadow-sm group">
+                    <summary class="flex justify-between items-center font-bold text-industrial-900 p-6 cursor-pointer">
+                        ¿Tienen tiempos de respuesta (SLA) garantizados para emergencias?
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-gray-600 px-6 pb-6 text-sm leading-relaxed">
+                        Sí. Dependiendo del nivel de criticidad de su planta y el tipo de póliza contratada, establecemos por contrato tiempos de respuesta remotos (menos de 2 horas) y tiempos de presencia física en planta (24 a 48 horas) para asegurar la continuidad de su producción.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / CTA SECTION -->
+    <section id="contacto" class="py-20 bg-industrial-900 text-white border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Deje de apagar incendios en su cuarto de máquinas.</h2>
+                    <p class="text-gray-400 text-lg mb-8">Solicite un diagnóstico preliminar sin costo. Un ingeniero especialista revisará su caudal, su problema actual y le entregará una ruta técnica (CAPEX u OPEX) en menos de 48 horas.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-industrial-800 p-3 rounded-full border border-gray-700">
+                                <span class="text-xl font-bold text-water-400">1</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold">Llenado del Perfil Técnico</h4>
+                                <p class="text-sm text-gray-400">Proporcione los datos básicos de su planta.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-industrial-800 p-3 rounded-full border border-gray-700">
+                                <span class="text-xl font-bold text-water-400">2</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold">Análisis de Ingeniería</h4>
+                                <p class="text-sm text-gray-400">Evaluamos la mejor tecnología (RO, UF, MBR).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-industrial-800 p-3 rounded-full border border-gray-700">
+                                <span class="text-xl font-bold text-water-400">3</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold">Propuesta y Operación</h4>
+                                <p class="text-sm text-gray-400">Presentamos un esquema de mitigación de riesgo y comenzamos a operar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- B2B FORM -->
+                <div class="lg:w-1/2 bg-white rounded-xl p-8 shadow-2xl text-gray-800">
+                    <h3 class="text-2xl font-bold mb-6 text-industrial-900">Solicitar Diagnóstico</h3>
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Nombre Completo</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-water-600 focus:border-transparent outline-none bg-gray-50" placeholder="Ing. Juan Pérez">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Correo Corporativo</label>
+                                <input type="email" class="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-water-600 focus:border-transparent outline-none bg-gray-50" placeholder="juan@empresa.com">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Cargo</label>
+                                <select class="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-water-600 outline-none bg-gray-50">
+                                    <option>Director de Planta</option>
+                                    <option>Gerente de Mantenimiento</option>
+                                    <option>Gerente de Ingeniería</option>
+                                    <option>Compras Industriales</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Industria</label>
+                                <select class="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-water-600 outline-none bg-gray-50">
+                                    <option>Automotriz / Metalmecánica</option>
+                                    <option>Alimentos y Bebidas</option>
+                                    <option>Farmacéutica / Química</option>
+                                    <option>Generación de Energía</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Interés Principal</label>
+                            <select class="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-water-600 outline-none bg-gray-50">
+                                <option>Cotizar Póliza de Mantenimiento (Evitar Paros)</option>
+                                <option>Renta de Equipo (Modelo OPEX)</option>
+                                <option>Desarrollo de Proyecto (Cumplimiento de Norma)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Descripción Breve o Caudal (m3/día)</label>
+                            <textarea rows="3" class="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-water-600 focus:border-transparent outline-none bg-gray-50" placeholder="Ej. Tenemos problemas con el índice de saturación en nuestras membranas..."></textarea>
+                        </div>
+                        <button type="button" class="w-full bg-water-600 hover:bg-water-500 text-white font-bold py-3.5 px-4 rounded-md transition duration-200 shadow-md">
+                            Enviar Solicitud Técnica
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-industrial-900 border-t border-gray-800 py-12 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <span class="text-2xl font-extrabold text-white tracking-tight mb-4 block">VECSA<span class="text-water-600">WATER</span></span>
+                <p class="mb-4">Especialistas B2B en Tratamiento de Agua Industrial en México. Aseguramos la continuidad operativa de su planta.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Soluciones</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-water-400 transition">Pólizas de Mantenimiento IoT</a></li>
+                    <li><a href="#" class="hover:text-water-400 transition">Renta de Equipos (OPEX)</a></li>
+                    <li><a href="#" class="hover:text-water-400 transition">Proyectos Llave en Mano</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Contacto</h4>
+                <ul class="space-y-2">
+                    <li>Ingeniería Técnica Comercial</li>
+                    <li>contacto@vecsawater.com</li>
+                    <li>México</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-center">
+            <p>&copy; 2026 VECSA WATER. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PARA ANIMACIÓN DE NÚMEROS (CONTADORES) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.counter');
+            
+            // Configuración del IntersectionObserver (detecta cuando el elemento entra en pantalla)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Se activa cuando el 50% de la sección es visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseFloat(counter.getAttribute('data-target'));
+                        const prefix = counter.getAttribute('data-prefix') || '';
+                        const suffix = counter.getAttribute('data-suffix') || '';
+                        const isFloat = counter.getAttribute('data-float') === 'true';
+                        
+                        const duration = 2000; // Duración de la animación en milisegundos (2 segundos)
+                        const stepTime = 20; // Frecuencia de actualización en ms
+                        const steps = duration / stepTime;
+                        const increment = target / steps;
+                        let current = 0;
+
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            // Formatear el número (con o sin decimales)
+                            const displayValue = isFloat ? current.toFixed(1) : Math.floor(current);
+                            counter.innerText = prefix + displayValue + suffix;
+                        }, stepTime);
+                        
+                        // Dejar de observar una vez que la animación ha ocurrido
+                        observer.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+
+            // Iniciar la observación en cada contador
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        });
+    </script>
+</body>
+</html>
