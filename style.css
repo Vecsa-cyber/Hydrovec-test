@@ -1692,10 +1692,11 @@ html, body {
 /* La línea gris de fondo */
 .timeline-line {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 4px;
+    margin-left: 1rem;
     background: #e2e8f0;
     transform: translateY(-50%);
     z-index: 1;
@@ -1939,3 +1940,376 @@ html, body {
 
 
 
+/* --- SECCIÓN FINANCIERA (TARJETAS TIPO BLOG) --- */
+.financial-section {
+    padding: 100px 0;
+    background-color: #f8fafc; /* Fondo gris muy suave */
+}
+
+.financial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Base de la Tarjeta */
+.financial-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; /* Clave para que la imagen no se salga de las esquinas */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.financial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* --- TARJETA DESTACADA (RENTA) --- */
+.financial-card.featured {
+    border: 2px solid var(--bio-cyan); /* Borde Azul Cyan */
+    transform: scale(1.02); /* Ligeramente más grande */
+    z-index: 2;
+}
+
+.financial-card.featured:hover {
+    transform: scale(1.02) translateY(-5px);
+}
+
+/* Etiqueta OPEX (Sticker Azul) */
+.opex-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--bio-cyan);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-bottom-left-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+/* Imagen de Cabecera */
+.card-image-header {
+    height: 200px; /* Altura fija para uniformidad */
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorte inteligente */
+    transition: transform 0.5s ease;
+}
+
+.financial-card:hover .card-image-header img {
+    transform: scale(1.05); /* Zoom suave al pasar el mouse */
+}
+
+/* Cuerpo de la Tarjeta */
+.card-body {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--deep-abyss);
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.card-body p {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Listas con Palomitas */
+.check-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-top: auto; /* Empuja la lista hacia abajo */
+}
+
+.check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.check-list i {
+    font-size: 1.1rem;
+    margin-top: 2px;
+    font-weight: bold;
+}
+
+/* Colores de las palomitas */
+.green-checks i {
+    color: #10b981; /* Verde éxito */
+}
+
+.blue-checks i {
+    color: var(--bio-cyan); /* Tu azul corporativo */
+}
+
+/* Enlaces (Call to Action) */
+.card-link {
+    text-decoration: none;
+    color: var(--bio-cyan);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.3s ease;
+    margin-top: 10px;
+}
+
+.card-link.highlight {
+    color: #0891b2; /* Un tono un poco más oscuro para la tarjeta destacada */
+}
+
+.card-link:hover {
+    gap: 10px;
+    text-decoration: underline;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    .financial-card.featured {
+        transform: none; /* Quitamos el zoom base en móvil */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a1628; font-family: 'Inter', sans-serif; color: #cdd6e8; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #00c2cb;
+  border: 1px solid rgba(0,194,203,0.4);
+  padding: 5px 13px; border-radius: 2px;
+}
+/* reutiliza tu .btn-glass */
+.btn-glass {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(0,194,203,0.12);
+  border: 1px solid rgba(0,194,203,0.5);
+  color: #00c2cb;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 600;
+  padding: 13px 26px; border-radius: 4px;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.25s, transform 0.2s;
+  letter-spacing: 0.04em;
+}
+.btn-glass:hover { background: rgba(0,194,203,0.22); transform: translateY(-1px); }
+
+/* ════════════════════════════════
+   SERVICIOS V2  — pega esto en style.css
+════════════════════════════════ */
+.services-section-v2 {
+  position: relative;
+  padding: 120px 0 140px;
+  overflow: hidden;
+}
+
+.services-section-v2::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,194,203,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,203,0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.services-section-v2::after {
+  content: '';
+  position: absolute; bottom: -100px; left: -100px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,194,203,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* header */
+.sv2-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 56px;
+  position: relative; z-index: 1;
+}
+
+.sv2-header h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800; color: #fff; line-height: 1.1; margin-top: 16px;
+}
+.sv2-header h2 em { font-style: italic; font-weight: 400; color: #00c2cb; }
+
+.sv2-subtitle {
+  font-size: 14px; color: #5c7299;
+  max-width: 260px; text-align: right; line-height: 1.7;
+}
+
+/* divisor */
+.sv2-divider {
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, #00c2cb, transparent);
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+
+/* lista */
+.sv2-list {
+  display: flex; flex-direction: column;
+  position: relative; z-index: 1;
+}
+
+.sv2-row {
+  display: grid;
+  grid-template-columns: 52px 260px 1fr auto;
+  align-items: center;
+  gap: 28px;
+  padding: 26px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  cursor: default;
+}
+.sv2-row:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.sv2-row:hover { background: rgba(0,194,203,0.05); }
+
+/* número */
+.sv2-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: #5c7299; letter-spacing: 0.08em;
+}
+
+/* icono + nombre */
+.sv2-title-wrap { display: flex; align-items: center; gap: 14px; }
+
+.sv2-icon {
+  width: 42px; height: 42px;
+  border: 1px solid rgba(0,194,203,0.25);
+  border-radius: 8px;
+  background: rgba(0,194,203,0.06);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.3s, background 0.3s;
+}
+.sv2-row:hover .sv2-icon {
+  border-color: #00c2cb;
+  background: rgba(0,194,203,0.14);
+}
+.sv2-icon i { font-size: 20px; color: #00c2cb; }
+
+.sv2-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: #fff; letter-spacing: -0.01em;
+}
+
+/* descripción */
+.sv2-desc {
+  font-size: 13.5px; color: #5c7299;
+  line-height: 1.65; max-width: 420px;
+  transition: color 0.3s;
+}
+.sv2-row:hover .sv2-desc { color: #8a9fc2; }
+
+/* tags */
+.sv2-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+
+.sv2-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #5c7299;
+  border: 1px solid rgba(255,255,255,0.09);
+  padding: 4px 10px; border-radius: 3px;
+  white-space: nowrap;
+  transition: color 0.3s, border-color 0.3s;
+}
+.sv2-row:hover .sv2-tag { color: #00c2cb; border-color: rgba(0,194,203,0.35); }
+
+/* barra inferior */
+.sv2-bottom {
+  margin-top: 64px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  position: relative; z-index: 1;
+}
+.sv2-bottom-text { font-size: 14px; color: #5c7299; max-width: 380px; line-height: 1.65; }
+
+/* responsive */
+@media (max-width: 960px) {
+  .sv2-row {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: 10px;
+  }
+  .sv2-num        { grid-row: 1; grid-column: 1; align-self: center; }
+  .sv2-title-wrap { grid-row: 1; grid-column: 2; }
+  .sv2-desc       { grid-row: 2; grid-column: 2; max-width: 100%; }
+  .sv2-tags       { grid-row: 3; grid-column: 2; justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .sv2-header   { grid-template-columns: 1fr; }
+  .sv2-subtitle { text-align: left; max-width: 100%; }
+  .sv2-bottom   { flex-direction: column; align-items: flex-start; }
+  .services-section-v2 { padding: 80px 0 100px; }
+}

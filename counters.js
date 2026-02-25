@@ -1,9 +1,9 @@
 // ==========================================
-// ANIMATED COUNTERS
+// ANIMATED COUNTERS (ADAPTADO)
 // ==========================================
 
-// Función para animar los contadores
 function animateCounter(element, target, duration = 2000) {
+    const isFloat = target % 1 !== 0; // Detectar si es decimal (como 1.6)
     const increment = target / (duration / 20);
     let current = 0;
     
@@ -14,19 +14,28 @@ function animateCounter(element, target, duration = 2000) {
             current = target;
             clearInterval(timer);
             
-            // Agregar sufijo según el valor
-            if (target === 99) {
-                element.textContent = target + '%';
+            // FORMATO FINAL
+            if (isFloat) {
+                // Si es decimal (1.6), mostramos 1 decimal y sin signo '+'
+                element.textContent = target.toFixed(1) + ' M'; 
+            } else if (target >= 100) {
+                // Si es entero (100), agregamos el '+'
+                element.textContent = Math.floor(target).toLocaleString() + '+';
             } else {
-                element.textContent = target.toLocaleString() + '+';
+                element.textContent = Math.floor(target);
             }
         } else {
-            element.textContent = Math.ceil(current).toLocaleString();
+            // DURANTE LA ANIMACIÓN
+            if (isFloat) {
+                element.textContent = current.toFixed(1);
+            } else {
+                element.textContent = Math.ceil(current).toLocaleString();
+            }
         }
     }, 20);
 }
 
-// Intersection Observer para iniciar contadores cuando sean visibles
+// Intersection Observer
 const observerOptions = {
     threshold: 0.5,
     rootMargin: '0px'
@@ -36,9 +45,11 @@ const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const counter = entry.target;
-            const target = parseInt(counter.getAttribute('data-target'));
             
-            // Iniciar animación solo una vez
+            // CAMBIO IMPORTANTE: Usamos parseFloat en vez de parseInt
+            // para que detecte el "1.6" correctamente
+            const target = parseFloat(counter.getAttribute('data-target'));
+            
             if (!counter.classList.contains('counted')) {
                 counter.classList.add('counted');
                 animateCounter(counter, target);
@@ -47,7 +58,6 @@ const counterObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observar todos los contadores
 document.addEventListener('DOMContentLoaded', () => {
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
