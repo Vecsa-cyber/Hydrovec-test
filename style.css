@@ -1708,7 +1708,6 @@ html, body {
 .timeline-dot {
     width: 60px;
     height: 60px;
-    padding-left: 5px;
     /* Quitamos el fondo y borde del contenedor principal para que no estorben */
     background: transparent; 
     border: none; 
