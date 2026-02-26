@@ -4,31 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Tratamiento de Agua Industrial y Ósmosis Inversa | Hydrovec</title>
 
-    <meta name="description" 
-          content="Soluciones en tratamiento de agua industrial en México. Renta de plantas, pólizas de mantenimiento y sistemas de ósmosis inversa. Optimice sus costos operativos con ingeniería Hydrovec.">
+    <meta name="description"
+        content="Soluciones en tratamiento de agua industrial en México. Renta de plantas, pólizas de mantenimiento y sistemas de ósmosis inversa. Optimice sus costos operativos con ingeniería Hydrovec.">
 
-    <meta name="keywords" 
-          content="osmosis inversa, tratamiento de agua, hidrovec, purificación industrial, ingeniería hídrica, saltillo, ramos arizpe, monterrey, mantenimiento industrial">
+    <meta name="keywords"
+        content="osmosis inversa, tratamiento de agua, hidrovec, purificación industrial, ingeniería hídrica, saltillo, ramos arizpe, monterrey, mantenimiento industrial">
 
     <meta name="author" content="Hydrovec Water Solutions">
-    
+
     <meta name="robots" content="index, follow">
-    
+
     <meta name="theme-color" content="#0B1120">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Hydrovec | Ingeniería Financiera y Operativa del Agua">
-    <meta property="og:description" content="Renta de equipos, pólizas de mantenimiento y proyectos llave en mano. Garantizamos calidad y continuidad operativa.">
+    <meta property="og:description"
+        content="Renta de equipos, pólizas de mantenimiento y proyectos llave en mano. Garantizamos calidad y continuidad operativa.">
     <meta property="og:image" content="https://tusitio.com/img/og-image-hydrovec.jpg">
     <meta property="og:url" content="https://tusitio.com">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="favicon.png">
-    
+
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
@@ -96,7 +99,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- SECCIÓN DE IMPACTO -->
     <section id="impacto" class="impact-section">
         <div class="container">
@@ -709,88 +712,121 @@
 
     <!-- Scripts para carousel -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // --- 1. LÓGICA DEL CARRUSEL INFINITO OPTIMIZADO ---
-            const container = document.querySelector('.carousel-container');
-            const track = document.querySelector('.carousel-track');
+    document.addEventListener("DOMContentLoaded", () => {
 
-            if (container && track) {
-                // A. Obtener elementos y gap real
-                const originalCards = Array.from(track.children);
-                const gap = parseFloat(getComputedStyle(track).gap) || 30;
+        // --- 1. LÓGICA DEL CARRUSEL INFINITO Y ARRASTRABLE ---
+        const container = document.querySelector('.carousel-container');
+        const track = document.querySelector('.carousel-track');
 
-                // B. Calcular ancho de un ciclo
-                let singleSetWidth = 0;
+        if (container && track) {
+            container.style.scrollBehavior = 'auto';
+
+            const originalCards = Array.from(track.children);
+            const gap = parseFloat(getComputedStyle(track).gap) || 30;
+
+            function getSingleSetWidth() {
+                let width = 0;
                 originalCards.forEach(card => {
-                    singleSetWidth += card.offsetWidth + gap;
+                    width += card.offsetWidth + gap;
                 });
+                return width;
+            }
 
-                // C. Clonado Agresivo (Para evitar parones)
-                while (track.scrollWidth < (window.innerWidth + singleSetWidth * 2)) {
-                    originalCards.forEach(card => {
-                        track.appendChild(card.cloneNode(true));
-                    });
-                }
+            let singleSetWidth = getSingleSetWidth();
 
-                // D. Animación
-                let isHovering = false;
-                const speed = 1;
-                let animationId;
-
-                function animate() {
-                    if (!isHovering) {
-                        container.scrollLeft += speed;
-
-                        // Reinicio imperceptible
-                        if (container.scrollLeft >= singleSetWidth) {
-                            container.scrollLeft -= singleSetWidth;
-                        }
-
-                        // Seguridad anti-bloqueo
-                        if (container.scrollLeft >= (track.scrollWidth - container.offsetWidth)) {
-                            container.scrollLeft = 0;
-                        }
-                    }
-                    animationId = requestAnimationFrame(animate);
-                }
-
-                // Iniciar carrusel
-                animate();
-
-                // E. Eventos de Pausa/Reanudación
-                container.addEventListener('mouseenter', () => isHovering = true);
-
-                container.addEventListener('mouseleave', () => {
-                    isHovering = false;
-                    cancelAnimationFrame(animationId);
-                    animate();
-                });
-
-                container.addEventListener('touchstart', () => isHovering = true);
-                container.addEventListener('touchend', () => {
-                    setTimeout(() => {
-                        isHovering = false;
-                        cancelAnimationFrame(animationId);
-                        animate();
-                    }, 1000);
+            const clonesNeeded = Math.ceil(window.innerWidth / singleSetWidth) + 2;
+            for (let i = 0; i < clonesNeeded; i++) {
+                originalCards.forEach(card => {
+                    track.appendChild(card.cloneNode(true));
                 });
             }
 
-            // --- 2. LÓGICA DEL PRELOADER (RESTAURADA) ---
-            const preloader = document.getElementById("preloader");
-            if (preloader) {
-                setTimeout(() => {
-                    preloader.classList.add("loaded");
-                    document.body.style.overflow = "auto";
+            // Variables Generales
+            let isHovering = false;
+            let scrollPos = 0; 
+            const speed = 1;
 
-                    // Si usas AOS, es buen momento para iniciarlo aquí
-                    if (typeof AOS !== 'undefined') {
-                        AOS.init({ duration: 1000, once: true });
+            // Variables para el Arrastre (Drag)
+            let isDragging = false;
+            let startX;
+            let scrollLeftInitial;
+
+            // --- FUNCIÓN PRINCIPAL DE ANIMACIÓN ---
+            function animate() {
+                // Solo avanza solo si no tienes el mouse encima y NO estás arrastrando
+                if (!isHovering && !isDragging) {
+                    scrollPos += speed;
+
+                    if (scrollPos >= singleSetWidth) {
+                        scrollPos -= singleSetWidth;
                     }
-                }, 1600); // Tu tiempo de espera original
+                    container.scrollLeft = scrollPos;
+                } else {
+                    scrollPos = container.scrollLeft;
+                }
+
+                requestAnimationFrame(animate);
             }
-        });
-    </script>
+
+            requestAnimationFrame(animate);
+
+            // --- EVENTOS DE PAUSA (HOVER) ---
+            container.addEventListener('mouseenter', () => isHovering = true);
+            container.addEventListener('mouseleave', () => {
+                isHovering = false;
+                isDragging = false; // Por si el mouse sale de la pantalla mientras arrastras
+                container.classList.remove('dragging');
+            });
+
+            container.addEventListener('touchstart', () => isHovering = true);
+            container.addEventListener('touchend', () => {
+                setTimeout(() => isHovering = false, 1000);
+            });
+
+            // --- EVENTOS DE ARRASTRE (DRAG TO SCROLL) ---
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                container.classList.add('dragging'); // Cambia el cursor a grabbing
+                startX = e.pageX - container.offsetLeft;
+                scrollLeftInitial = container.scrollLeft;
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.classList.remove('dragging');
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return; // Si no está presionado el clic, no hace nada
+                e.preventDefault(); // Doble seguridad contra selección de texto
+                
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 1.5; // El 1.5 hace que el arrastre se sienta un poco más rápido
+                
+                container.scrollLeft = scrollLeftInitial - walk;
+                scrollPos = container.scrollLeft; // Sincroniza para que al soltar continúe fluido
+            });
+
+            // --- EVENTO DE REDIMENSIONAMIENTO ---
+            window.addEventListener('resize', () => {
+                singleSetWidth = getSingleSetWidth();
+            });
+        }
+
+        // --- 2. LÓGICA DEL PRELOADER ---
+        const preloader = document.getElementById("preloader");
+        if (preloader) {
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+                document.body.style.overflow = "auto";
+
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({ duration: 1000, once: true });
+                }
+            }, 1600);
+        }
+    });
+</script>
 
     <!-- Scripts externos separados -->
     <script src="navbar.js"></script>
