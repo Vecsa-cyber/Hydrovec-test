@@ -53,7 +53,7 @@
     <header class="hero">
         <div class="video-overlay"></div>
 
-        <img src="hero.png" alt="Fondo Vecsa" class="hero-video" loading="eager" fetchpriority="high">
+        <img src="wallpap.png" alt="Fondo Vecsa" class="hero-video" loading="eager" fetchpriority="high">
 
         <!--<video autoplay muted loop playsinline class="hero-video">
             <source src="index-wallpaper.png" type="image/png">
@@ -80,25 +80,6 @@
             </div>
         </div>
     </header>
-
-    <!-- SECCIÓN DE ALIADOS -->
-    <div class="partners-strip">
-        <div class="container">
-            <p class="partners-title">Tecnología certificada por líderes globales</p>
-
-            <div class="logos-grid">
-                <img src="image-removebg-preview (2).png" alt="VIQUA" title="VIQUA">
-
-                <img src="lanx.png" alt="LANXESS" title="LANXESS">
-
-                <img src="puro.png" alt="PUROLITE" title="PUROLITE">
-
-                <img src="pentair.png" alt="PENTAIR" title="PENTAIR">
-
-                <img src="image-removebg-preview (3).png" title="Barmesa" style="height: 45px;">
-            </div>
-        </div>
-    </div>
 
     <!-- SECCIÓN DE IMPACTO -->
     <section id="impacto" class="impact-section">
@@ -606,6 +587,31 @@
         </div>
     </section>
 
+    <!-- SECCIÓN DE SOCIOS COMERCIALES -->
+    <div class="partners-strip">
+        <div class="container">
+            <p class="partners-title">Tecnología certificada por Socios Comerciales</p>
+
+            <div class="logos-grid">
+                <img src="image-removebg-preview (2).png" alt="VIQUA" title="VIQUA">
+
+                <img src="lanx.png" alt="LANXESS" title="LANXESS">
+
+                <img src="puro.png" alt="PUROLITE" title="PUROLITE">
+
+                <img src="pentair.png" alt="PENTAIR" title="PENTAIR">
+
+                <img src="#.png" alt="Mann Hummel" title="Mann Hummel">
+
+                <img src="#.png" alt="Hydranautics" title="PUROLITE">
+
+                <img src="#.png" alt="x" title="x">
+
+                <img src="image-removebg-preview (3).png" title="Barmesa" style="height: 45px;">
+            </div>
+        </div>
+    </div>
+
     <!-- Para complementar informacion -->
     <footer class="site-footer">
         <div class="container">
@@ -712,121 +718,121 @@
 
     <!-- Scripts para carousel -->
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", () => {
 
-        // --- 1. LÓGICA DEL CARRUSEL INFINITO Y ARRASTRABLE ---
-        const container = document.querySelector('.carousel-container');
-        const track = document.querySelector('.carousel-track');
+            // --- 1. LÓGICA DEL CARRUSEL INFINITO Y ARRASTRABLE ---
+            const container = document.querySelector('.carousel-container');
+            const track = document.querySelector('.carousel-track');
 
-        if (container && track) {
-            container.style.scrollBehavior = 'auto';
+            if (container && track) {
+                container.style.scrollBehavior = 'auto';
 
-            const originalCards = Array.from(track.children);
-            const gap = parseFloat(getComputedStyle(track).gap) || 30;
+                const originalCards = Array.from(track.children);
+                const gap = parseFloat(getComputedStyle(track).gap) || 30;
 
-            function getSingleSetWidth() {
-                let width = 0;
-                originalCards.forEach(card => {
-                    width += card.offsetWidth + gap;
-                });
-                return width;
-            }
+                function getSingleSetWidth() {
+                    let width = 0;
+                    originalCards.forEach(card => {
+                        width += card.offsetWidth + gap;
+                    });
+                    return width;
+                }
 
-            let singleSetWidth = getSingleSetWidth();
+                let singleSetWidth = getSingleSetWidth();
 
-            const clonesNeeded = Math.ceil(window.innerWidth / singleSetWidth) + 2;
-            for (let i = 0; i < clonesNeeded; i++) {
-                originalCards.forEach(card => {
-                    track.appendChild(card.cloneNode(true));
-                });
-            }
+                const clonesNeeded = Math.ceil(window.innerWidth / singleSetWidth) + 2;
+                for (let i = 0; i < clonesNeeded; i++) {
+                    originalCards.forEach(card => {
+                        track.appendChild(card.cloneNode(true));
+                    });
+                }
 
-            // Variables Generales
-            let isHovering = false;
-            let scrollPos = 0; 
-            const speed = 1;
+                // Variables Generales
+                let isHovering = false;
+                let scrollPos = 0;
+                const speed = 1;
 
-            // Variables para el Arrastre (Drag)
-            let isDragging = false;
-            let startX;
-            let scrollLeftInitial;
+                // Variables para el Arrastre (Drag)
+                let isDragging = false;
+                let startX;
+                let scrollLeftInitial;
 
-            // --- FUNCIÓN PRINCIPAL DE ANIMACIÓN ---
-            function animate() {
-                // Solo avanza solo si no tienes el mouse encima y NO estás arrastrando
-                if (!isHovering && !isDragging) {
-                    scrollPos += speed;
+                // --- FUNCIÓN PRINCIPAL DE ANIMACIÓN ---
+                function animate() {
+                    // Solo avanza solo si no tienes el mouse encima y NO estás arrastrando
+                    if (!isHovering && !isDragging) {
+                        scrollPos += speed;
 
-                    if (scrollPos >= singleSetWidth) {
-                        scrollPos -= singleSetWidth;
+                        if (scrollPos >= singleSetWidth) {
+                            scrollPos -= singleSetWidth;
+                        }
+                        container.scrollLeft = scrollPos;
+                    } else {
+                        scrollPos = container.scrollLeft;
                     }
-                    container.scrollLeft = scrollPos;
-                } else {
-                    scrollPos = container.scrollLeft;
+
+                    requestAnimationFrame(animate);
                 }
 
                 requestAnimationFrame(animate);
+
+                // --- EVENTOS DE PAUSA (HOVER) ---
+                container.addEventListener('mouseenter', () => isHovering = true);
+                container.addEventListener('mouseleave', () => {
+                    isHovering = false;
+                    isDragging = false; // Por si el mouse sale de la pantalla mientras arrastras
+                    container.classList.remove('dragging');
+                });
+
+                container.addEventListener('touchstart', () => isHovering = true);
+                container.addEventListener('touchend', () => {
+                    setTimeout(() => isHovering = false, 1000);
+                });
+
+                // --- EVENTOS DE ARRASTRE (DRAG TO SCROLL) ---
+                container.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    container.classList.add('dragging'); // Cambia el cursor a grabbing
+                    startX = e.pageX - container.offsetLeft;
+                    scrollLeftInitial = container.scrollLeft;
+                });
+
+                container.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    container.classList.remove('dragging');
+                });
+
+                container.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return; // Si no está presionado el clic, no hace nada
+                    e.preventDefault(); // Doble seguridad contra selección de texto
+
+                    const x = e.pageX - container.offsetLeft;
+                    const walk = (x - startX) * 1.5; // El 1.5 hace que el arrastre se sienta un poco más rápido
+
+                    container.scrollLeft = scrollLeftInitial - walk;
+                    scrollPos = container.scrollLeft; // Sincroniza para que al soltar continúe fluido
+                });
+
+                // --- EVENTO DE REDIMENSIONAMIENTO ---
+                window.addEventListener('resize', () => {
+                    singleSetWidth = getSingleSetWidth();
+                });
             }
 
-            requestAnimationFrame(animate);
+            // --- 2. LÓGICA DEL PRELOADER ---
+            const preloader = document.getElementById("preloader");
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.classList.add("loaded");
+                    document.body.style.overflow = "auto";
 
-            // --- EVENTOS DE PAUSA (HOVER) ---
-            container.addEventListener('mouseenter', () => isHovering = true);
-            container.addEventListener('mouseleave', () => {
-                isHovering = false;
-                isDragging = false; // Por si el mouse sale de la pantalla mientras arrastras
-                container.classList.remove('dragging');
-            });
-
-            container.addEventListener('touchstart', () => isHovering = true);
-            container.addEventListener('touchend', () => {
-                setTimeout(() => isHovering = false, 1000);
-            });
-
-            // --- EVENTOS DE ARRASTRE (DRAG TO SCROLL) ---
-            container.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                container.classList.add('dragging'); // Cambia el cursor a grabbing
-                startX = e.pageX - container.offsetLeft;
-                scrollLeftInitial = container.scrollLeft;
-            });
-
-            container.addEventListener('mouseup', () => {
-                isDragging = false;
-                container.classList.remove('dragging');
-            });
-
-            container.addEventListener('mousemove', (e) => {
-                if (!isDragging) return; // Si no está presionado el clic, no hace nada
-                e.preventDefault(); // Doble seguridad contra selección de texto
-                
-                const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 1.5; // El 1.5 hace que el arrastre se sienta un poco más rápido
-                
-                container.scrollLeft = scrollLeftInitial - walk;
-                scrollPos = container.scrollLeft; // Sincroniza para que al soltar continúe fluido
-            });
-
-            // --- EVENTO DE REDIMENSIONAMIENTO ---
-            window.addEventListener('resize', () => {
-                singleSetWidth = getSingleSetWidth();
-            });
-        }
-
-        // --- 2. LÓGICA DEL PRELOADER ---
-        const preloader = document.getElementById("preloader");
-        if (preloader) {
-            setTimeout(() => {
-                preloader.classList.add("loaded");
-                document.body.style.overflow = "auto";
-
-                if (typeof AOS !== 'undefined') {
-                    AOS.init({ duration: 1000, once: true });
-                }
-            }, 1600);
-        }
-    });
-</script>
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({ duration: 1000, once: true });
+                    }
+                }, 1600);
+            }
+        });
+    </script>
 
     <!-- Scripts externos separados -->
     <script src="navbar.js"></script>
