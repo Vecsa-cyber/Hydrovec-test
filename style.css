@@ -833,15 +833,16 @@ footer {
 
 .footer-desc {
     line-height: 1.6;
-    margin-bottom: 25px;
     max-width: 300px;
+    text-align: center; /* Centra el texto por dentro */
+    margin: 0 auto 25px auto; /* Centra la caja entera (Arriba 0, Lados Auto, Abajo 25px) */
 }
 
-/* Redes Sociales */
+/* Asegurarnos de que las redes también estén centradas entre sí */
 .social-links {
     display: flex;
-    gap: 15px;
-    margin-left: 5dvh;
+    justify-content: center;
+    gap: 15px; /* Espacio entre los circulitos */
 }
 
 .social-links a {
@@ -960,7 +961,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(5, 9, 17, 0.8);
+    background: rgba(5, 9, 17, 0.85);
     backdrop-filter: blur(8px);
     z-index: 2000;
     display: flex;
@@ -2325,4 +2326,38 @@ body { background: #0a1628; font-family: 'Inter', sans-serif; color: #cdd6e8; }
   .sv2-subtitle { text-align: left; max-width: 100%; }
   .sv2-bottom   { flex-direction: column; align-items: flex-start; }
   .services-section-v2 { padding: 80px 0 100px; }
+}
+
+
+/* --- ESTILO PARA TARJETA QUE OCUPA TODO EL ANCHO --- */
+.card-wide {
+    /* Esto le obliga a ocupar desde la primera hasta la última columna disponible */
+    grid-column: 1 / -1; 
+}
+
+/* Solo en pantallas grandes (Computadoras y Tablets horizontales) */
+@media (min-width: 900px) {
+    .card-wide {
+        flex-direction: row; /* Pone la imagen a la izquierda y el texto a la derecha */
+        align-items: stretch;
+    }
+
+    .card-wide .card-image-header {
+        width: 40%; /* La imagen ocupa el 40% del ancho */
+        height: auto; 
+        min-height: 100%; /* Asegura que la imagen cubra toda la altura */
+    }
+
+    .card-wide .card-body {
+        width: 60%; /* El texto ocupa el 60% del ancho */
+        padding: 40px 50px; /* Le damos más respiro al texto */
+        justify-content: center; /* Centramos el contenido verticalmente */
+    }
+    
+    /* Pequeño ajuste para que la lista se vea en dos columnas dentro de la tarjeta ancha */
+    .card-wide .check-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 20px;
+    }
 }
